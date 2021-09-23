@@ -12,13 +12,19 @@ public class TodoMain {
 	
 		Scanner sc = new Scanner(System.in);
 		TodoList l = new TodoList();
+		String filename= ("todolist.txt");
 		boolean isList = false;
 		boolean quit = false;
+		TodoUtil.loadlist(l,filename);
+		Menu.displaymenu();
 		do {
-			Menu.displaymenu();
+			Menu.prompt();
 			isList = false;
 			String choice = sc.next();
 			switch (choice) {
+			case "help":
+				Menu.displaymenu();
+				isList= false;
 
 			case "add":
 				TodoUtil.createItem(l);
@@ -57,11 +63,12 @@ public class TodoMain {
 				break;
 
 			default:
-				System.out.println("please enter one of the above mentioned command");
+				System.out.println("[오류]\n위에 언급된 메뉴중에서 선택해 주세요.(도움말-help)\n");
 				break;
 			}
 			
 			if(isList) l.listAll();
 		} while (!quit);
+		TodoUtil.savelist(l,filename);
 	}
 }
