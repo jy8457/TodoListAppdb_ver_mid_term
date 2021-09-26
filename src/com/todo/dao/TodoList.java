@@ -39,6 +39,8 @@ public class TodoList {
 		Collections.sort(list, new TodoSortByName());
 		// 5번 메뉴인 ls_name_asc과 연결되어 있음, Service 폴더안에 todosortbyname에 comparator를 통해 이름  오름차순 정렬이 가능하다.
 	}
+	
+	
 
 	public void listAll() {
 		System.out.println("\n"
@@ -59,7 +61,7 @@ public class TodoList {
 	}
 	public void sortByDatedesc() {
 		Collections.sort(list, new TodoSortByDate().reversed());
-		// 7번 메뉴인 ls_date과 연결되어 있음, Service 폴더안에 todosortbydate에 comparator를 통해 날짜 오름차순 정렬이 가능하다.
+		
 	}
 
 	public int indexOf(TodoItem t) {
@@ -70,11 +72,26 @@ public class TodoList {
 	}
 	
 	public void find(String line) {
+		int count=0;
 		for (TodoItem item : list) {
-			if (list.contains(line)) {
+			if (item.getTitle().contains(line)||item.getDesc().contains(line)) {
 				System.out.println(+list.indexOf(item)+1+"."+ "["+item.getCategory()+"] "+ item.getTitle()+ " - "+ item.getDesc() + " "+ item.getDue_date()+" - " +item.getCurrent_date());
+			count++;
 			}
 		}
+		System.out.printf("총 %d개의 항목을 찾았습니다!\n",count);
+	}
+	
+	public void find_cate(String line) {
+		int count=0;
+		for(TodoItem item:list) {
+			if(item.getCategory().contains(line)) {
+				System.out.println(+list.indexOf(item)+1+"."+ "["+item.getCategory()+"] "+ item.getTitle()+ " - "+ item.getDesc() + " "+ item.getDue_date()+" - " +item.getCurrent_date());
+				count++;
+			}
+			
+		}
+		System.out.printf("총 %d개의 항목을 찾았습니다!\n",count);
 	}
 
 	public Boolean isDuplicate(String title) {

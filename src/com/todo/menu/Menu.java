@@ -14,7 +14,8 @@ public class Menu {
         System.out.println("7. [날짜순 정렬] ( ls_date )");
         System.out.println("8. [날짜역순 정렬] ( ls_date_desc )");
         System.out.println("9. [키워드 찾기] ( find )");
-        System.out.println("10. [종료] (Or press escape key to exit)");
+        System.out.println("10. [카테고리 찾기] ( find_cate )");
+        System.out.println("11. [종료] (Or press escape key to exit)");
         //System.out.println("원하는 메뉴를 선택하세요 >");
     }
     public static void prompt()

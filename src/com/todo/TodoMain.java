@@ -65,6 +65,7 @@ public class TodoMain {
 				TodoUtil.find(l);
 				break;
 			case"find_cate":
+				TodoUtil.find_cate(l);
 				break;
 				
 			

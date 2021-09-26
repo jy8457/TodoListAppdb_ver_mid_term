@@ -47,7 +47,7 @@ public class TodoUtil {
 	}
 
 	public static void deleteItem(TodoList l) {
-		
+		TodoUtil.listAll(l);
 		Scanner sc = new Scanner(System.in);
 		//String title = sc.next();
 		
@@ -55,8 +55,19 @@ public class TodoUtil {
 				+ "[항목 삭제]\n"
 				+ "삭제 하려는 항목의 숫자을 입력하세요.\n"
 				+ "\n");
-		TodoUtil.listAll(l);
+		
 		int num=sc.nextInt();
+		int mark=0;
+				
+				for(TodoItem item:l.getList()) {
+					if(num-1==l.indexOf(item)) {
+						mark=1;
+					}
+				}
+				if(mark==0) {
+					System.out.println("그런 항목은 없습니다!");
+					return;
+				}
 		for (TodoItem item : l.getList()) {
 			if (num-1==l.indexOf(item)) {
 				
@@ -79,23 +90,30 @@ public class TodoUtil {
 	public static void updateItem(TodoList l) {
 		
 		Scanner sc = new Scanner(System.in);
-		
+		TodoUtil.listAll(l);
 		System.out.println("\n"
 				+ "[항목 수정]\n"
 				+ "수정 하려는 항목의 숫자를 입력하세요.\n"
 				+ "\n");
 		int num=sc.nextInt();
-		/*if (!l.isDuplicate(title)) {
-			System.out.println("그런 이름은 없습니다.");
+		int mark=0;
+		
+		for(TodoItem item:l.getList()) {
+			if(num-1==l.indexOf(item)) {
+				mark=1;
+			}
+		}
+		if(mark==0) {
+			System.out.println("그런 항목은 없습니다!");
 			return;
-		}*/
-
+		}
 		System.out.println("새로운 이름을 입력하세요.");
 		String new_title = sc.next().trim();
 		if (l.isDuplicate(new_title)) {
 			System.out.println("이름은 중복 될 수 없습니다.");
 			return;
 		}
+		
 		System.out.println("새로운 카테고리를 입력하세요.");
 		String new_cate=sc.next();
 		sc.nextLine();
@@ -128,7 +146,7 @@ public class TodoUtil {
 		TodoUtil.listAll(l);
 		Scanner sc=new Scanner(System.in);
 		System.out.println("찾으려는 항목의 키워드를 입력하세요.");
-		String line=sc.nextLine();
+		String line=sc.next();
 		l.find(line);
 		
 		
@@ -140,6 +158,11 @@ public class TodoUtil {
 		
 	}
 	public static void find_cate(TodoList l) {
+		TodoUtil.listAll(l);
+		Scanner sc=new Scanner(System.in);
+		System.out.println("찾으려는 카테고리를 입력해주세요");
+		String line=sc.next();
+		l.find_cate(line);
 		
 	}
 	

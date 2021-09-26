@@ -53,6 +53,7 @@ public class TodoItem {
 	public String getCategory() {
 		return category;
 	}
+	
 
 	public void setCategoty(String categoty) {
 		this.category = categoty;
