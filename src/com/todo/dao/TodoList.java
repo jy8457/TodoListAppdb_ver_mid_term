@@ -57,14 +57,31 @@ public class TodoList {
 		Collections.sort(list, new TodoSortByDate());
 		// 7번 메뉴인 ls_date과 연결되어 있음, Service 폴더안에 todosortbydate에 comparator를 통해 날짜 오름차순 정렬이 가능하다.
 	}
+	public void sortByDatedesc() {
+		Collections.sort(list, new TodoSortByDate().reversed());
+		// 7번 메뉴인 ls_date과 연결되어 있음, Service 폴더안에 todosortbydate에 comparator를 통해 날짜 오름차순 정렬이 가능하다.
+	}
 
 	public int indexOf(TodoItem t) {
 		return list.indexOf(t);
 	}
+	public int getSize() {
+		return list.size();
+	}
+	
+	public void find(String line) {
+		for (TodoItem item : list) {
+			if (list.contains(line)) {
+				System.out.println(+list.indexOf(item)+1+"."+ "["+item.getCategory()+"] "+ item.getTitle()+ " - "+ item.getDesc() + " "+ item.getDue_date()+" - " +item.getCurrent_date());
+			}
+		}
+	}
 
 	public Boolean isDuplicate(String title) {
 		for (TodoItem item : list) {
-			if (title.equals(item.getTitle())) return true;
+			if (title.equals(item.getTitle())) {
+				System.out.println(+list.indexOf(item)+1+"."+ "["+item.getCategory()+"] "+ item.getTitle()+ " - "+ item.getDesc() + " "+ item.getDue_date()+" - " +item.getCurrent_date());
+			}
 		}
 		return false;
 	}

@@ -52,11 +52,22 @@ public class TodoMain {
 				l.reverseList();
 				isList = true;
 				break;
+			case "ls_date_desc":
+				l.sortByDatedesc();
+				isList=true;
+				break;
 				
 			case "ls_date":
 				l.sortByDate();
 				isList = true;
 				break;
+			case "find":
+				TodoUtil.find(l);
+				break;
+			case"find_cate":
+				break;
+				
+			
 
 			case "exit":
 				quit = true;
