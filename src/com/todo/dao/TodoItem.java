@@ -8,6 +8,7 @@ public class TodoItem {
     private String current_date;
     private String category;
     private String due_date;
+    private int id;
 
     public TodoItem(String title, String desc,String category,String due_date){
     	this.category=category;
@@ -64,9 +65,17 @@ public class TodoItem {
     }
     @Override
     public String toString() {
-    	return category+ "##"+ title + "##" + desc + "##"+ due_date + "##" + current_date + "\n"; 
+    	return "["+category+"] "+ title+ " - "+ desc + " "+ due_date+" - " +current_date +"\n"; 
     }
+//System.out.println(+list.indexOf(item)+1+"."+ "["+item.getCategory()+"] "+ item.getTitle()+ " - "+ item.getDesc() + " "+ item.getDue_date()+" - " +item.getCurrent_date());
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 	
     
     

@@ -15,7 +15,7 @@ public class TodoMain {
 		String filename= ("todolist.txt");
 		boolean isList = false;
 		boolean quit = false;
-		TodoUtil.loadlist(l,filename);
+		//l.importData(filename);
 		Menu.displaymenu();
 		do {
 			Menu.prompt();
@@ -43,29 +43,38 @@ public class TodoMain {
 				break;
 
 			case "ls_name_asc":
-				l.sortByName();
-				isList = true;
+				System.out.println("제목순으로 정렬하였습니다.");
+				TodoUtil.listAll(l,"title",1);
 				break;
 
 			case "ls_name_desc":
-				l.sortByName();
-				l.reverseList();
-				isList = true;
-				break;
-			case "ls_date_desc":
-				l.sortByDatedesc();
-				isList=true;
+				System.out.println("제목역순으로 정렬하였습니다.");
+				TodoUtil.listAll(l,"title",0);
 				break;
 				
 			case "ls_date":
-				l.sortByDate();
-				isList = true;
+				System.out.println("날짜순으로 정렬하였습니다.");
+				TodoUtil.listAll(l,"due_date",1);
 				break;
+				
+			case "ls_date_desc":
+				System.out.println("날짜역순으로 정렬하였습니다.");
+				TodoUtil.listAll(l,"due_date",0);
+				break;
+				
+			
 			case "find":
-				TodoUtil.find(l);
+				String keyword = sc.nextLine().trim();
+				TodoUtil.find(l,keyword);
 				break;
+				
 			case"find_cate":
-				TodoUtil.find_cate(l);
+				String cate= sc.nextLine().trim();
+				TodoUtil.find_cate(l,cate);
+				break;
+				
+			case"ls_cate":
+				TodoUtil.listCateAll(l);
 				break;
 				
 			
