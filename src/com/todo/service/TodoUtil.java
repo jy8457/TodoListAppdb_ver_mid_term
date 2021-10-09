@@ -58,7 +58,7 @@ public class TodoUtil {
 				+ "\n");
 		
 		int num=sc.nextInt();
-		if(l.deleteItem(num)>0)
+		if(l.deleteItem(num-1)>0)
 			System.out.println("삭제되었습니다.");
 				
 	
@@ -113,7 +113,7 @@ public class TodoUtil {
 		System.out.printf("[전체 목록, 총 %d개]\n",l.getCount());
 		
 		for (TodoItem item : l.getList()) {
-			System.out.println(+l.indexOf(item)+1+"."+ "["+item.getCategory()+"] "+ item.getTitle()+ " - "+ item.getDesc() + " "+ item.getDue_date()+" - " +item.getCurrent_date());
+			System.out.println(+item.getId()+1+"."+ "["+item.getCategory()+"] "+ item.getTitle()+ " - "+ item.getDesc() + " "+ item.getDue_date()+" - " +item.getCurrent_date());
 			
 		}
 	}
@@ -123,16 +123,16 @@ public class TodoUtil {
 			System.out.printf("[전체 목록, 총 %d개]\n",l.getCount());
 			
 			for (TodoItem item : l.getList()) {
-				System.out.println(+l.indexOf(item)+1+"."+ "["+item.getCategory()+"] "+ item.getTitle()+ " - "+ item.getDesc() + " "+ item.getDue_date()+" - " +item.getCurrent_date());
+				System.out.println(+item.getId()+1+"."+ "["+item.getCategory()+"] "+ item.getTitle()+ " - "+ item.getDesc() + " "+ item.getDue_date()+" - " +item.getCurrent_date());
 				
 			}
 		}
 	
 	public static void find(TodoList l,String keyword) {
-		TodoUtil.listAll(l);
+		//TodoUtil.listAll(l);
 		int count=0;
 		for(TodoItem item: l.getList(keyword)) {
-			System.out.println(+l.indexOf(item)+1+"."+ "["+item.getCategory()+"] "+ item.getTitle()+ " - "+ item.getDesc() + " "+ item.getDue_date()+" - " +item.getCurrent_date());
+			System.out.println(+item.getId()+1+"."+ "["+item.getCategory()+"] "+ item.getTitle()+ " - "+ item.getDesc() + " "+ item.getDue_date()+" - " +item.getCurrent_date());
 			count++;
 		}
 		System.out.printf("총 %d개의 항목을 찾았습니다.\n", count);
@@ -142,7 +142,7 @@ public class TodoUtil {
 		TodoUtil.listAll(l);
 		int count=0;
 		for(TodoItem item:l.getListCategory(cate)) {
-			System.out.println(+l.indexOf(item)+1+"."+ "["+item.getCategory()+"] "+ item.getTitle()+ " - "+ item.getDesc() + " "+ item.getDue_date()+" - " +item.getCurrent_date());
+			System.out.println(+item.getId()+1+"."+ "["+item.getCategory()+"] "+ item.getTitle()+ " - "+ item.getDesc() + " "+ item.getDue_date()+" - " +item.getCurrent_date());
 			count++;
 		}
 		System.out.printf("\n총 %d개의 항목을 찾았습니다.\n", count);

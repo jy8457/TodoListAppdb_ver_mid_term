@@ -48,7 +48,7 @@ public class TodoList {
 //	}
 
 	public int deleteItem(int index) {
-		String sql="delete form list where id=?;";
+		String sql="delete from list where id=?;";
 		PreparedStatement pstmt;
 		int count=0;
 		try {
@@ -89,7 +89,7 @@ public class TodoList {
 		
 		try {
 			stmt = conn.createStatement();
-			String sql="select *from list ";
+			String sql="SELECT * FROM list ";
 			ResultSet rs= stmt.executeQuery(sql);
 			while(rs.next()) {
 				int id = rs.getInt("id");
@@ -113,10 +113,11 @@ public class TodoList {
 
 	public ArrayList<TodoItem> getList(String keyword) {
 		ArrayList<TodoItem> list = new ArrayList<TodoItem>();
+		System.out.println(keyword);
 		PreparedStatement pstmt;
-		keyword="%"+keyword+"%";
+		keyword= "%"+keyword+"%";
 		try {
-			String sql="select *from list where title like ? or memo like ?";
+			String sql="SELECT * FROM list WHERE title like ? or memo like ?";
 			pstmt= conn.prepareStatement(sql);
 			pstmt.setString(1, keyword);
 			pstmt.setString(2, keyword);
@@ -267,20 +268,21 @@ public class TodoList {
 		Statement stmt;
 		try {
 			stmt=conn.createStatement();
-			String sql="select distinct category from list";
+			String sql="SELECT DISTINCT category FROM list";
 			ResultSet rs = stmt.executeQuery(sql);
 			stmt.close();
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return list;
+		//return null;
 	}
 	
 	public ArrayList<TodoItem> getListCategory(String keyword){
 		ArrayList<TodoItem> list=new ArrayList<TodoItem>();
 		PreparedStatement pstmt;
 		try {
-			String sql="select * from list where category = ?";
+			String sql="SELECT * FROM list WHERE category = ?";
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, keyword);
 			ResultSet rs = pstmt.executeQuery(sql);

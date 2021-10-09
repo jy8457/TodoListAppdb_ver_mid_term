@@ -64,7 +64,8 @@ public class TodoMain {
 				
 			
 			case "find":
-				String keyword = sc.nextLine().trim();
+				System.out.println("찾을 내용을 입력해주세요!");
+				String keyword = sc.next().trim();
 				TodoUtil.find(l,keyword);
 				break;
 				
