@@ -113,7 +113,7 @@ public class TodoUtil {
 		System.out.printf("[전체 목록, 총 %d개]\n",l.getCount());
 		
 		for (TodoItem item : l.getList()) {
-			System.out.println(+item.getId()+1+"."+ "["+item.getCategory()+"] "+ item.getTitle()+ " - "+ item.getDesc() + " "+ item.getDue_date()+" - " +item.getCurrent_date());
+			System.out.println(+item.getId()+"."+ "["+item.getCategory()+"] "+ item.getTitle()+ " - "+ item.getDesc() + " "+ item.getDue_date()+" - " +item.getCurrent_date());
 			
 		}
 	}
@@ -122,8 +122,8 @@ public class TodoUtil {
 			
 			System.out.printf("[전체 목록, 총 %d개]\n",l.getCount());
 			
-			for (TodoItem item : l.getList()) {
-				System.out.println(+item.getId()+1+"."+ "["+item.getCategory()+"] "+ item.getTitle()+ " - "+ item.getDesc() + " "+ item.getDue_date()+" - " +item.getCurrent_date());
+			for (TodoItem item : l.getOrderedList(orderby, ordering)) {
+				System.out.println(+item.getId()+"."+ "["+item.getCategory()+"] "+ item.getTitle()+ " - "+ item.getDesc() + " "+ item.getDue_date()+" - " +item.getCurrent_date());
 				
 			}
 		}
@@ -139,10 +139,10 @@ public class TodoUtil {
 		
 	}
 	public static void find_cate(TodoList l,String cate) {
-		TodoUtil.listAll(l);
+		//TodoUtil.listAll(l);
 		int count=0;
 		for(TodoItem item:l.getListCategory(cate)) {
-			System.out.println(+item.getId()+1+"."+ "["+item.getCategory()+"] "+ item.getTitle()+ " - "+ item.getDesc() + " "+ item.getDue_date()+" - " +item.getCurrent_date());
+			System.out.println(+item.getId()+"."+ "["+item.getCategory()+"] "+ item.getTitle()+ " - "+ item.getDesc() + " "+ item.getDue_date()+" - " +item.getCurrent_date());
 			count++;
 		}
 		System.out.printf("\n총 %d개의 항목을 찾았습니다.\n", count);
@@ -151,12 +151,12 @@ public class TodoUtil {
 	}
 	
 	public static void listCateAll(TodoList l) {
-		int count =0;
+		
 		for(String item:l.getCategories()) {
 			System.out.print(item + " ");
-			count++;
+			
 		}
-		System.out.printf("\n총 %d개의 카테고리가 등록되어 있습니다,\n", count);
+		//System.out.printf("\n총 %d개의 카테고리가 등록되어 있습니다,\n", count);
 	}
 	
 	public static void loadlist(TodoList l,String filename) {

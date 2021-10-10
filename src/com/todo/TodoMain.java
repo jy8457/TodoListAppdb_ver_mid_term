@@ -42,7 +42,7 @@ public class TodoMain {
 				TodoUtil.listAll(l);
 				break;
 
-			case "ls_name_asc":
+			case "ls_name":
 				System.out.println("제목순으로 정렬하였습니다.");
 				TodoUtil.listAll(l,"title",1);
 				break;
@@ -70,7 +70,8 @@ public class TodoMain {
 				break;
 				
 			case"find_cate":
-				String cate= sc.nextLine().trim();
+				System.out.println("찾을 내용을 입력해주세요!");
+				String cate= sc.next().trim();
 				TodoUtil.find_cate(l,cate);
 				break;
 				

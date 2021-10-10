@@ -122,6 +122,19 @@ public class TodoList {
 			pstmt.setString(1, keyword);
 			pstmt.setString(2, keyword);
 			ResultSet rs= pstmt.executeQuery();
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				String category =rs.getString("category");
+				String title =rs.getString("title");
+				String memo =rs.getString("memo");
+				String due_date =rs.getString("due_date");
+				String current_date =rs.getString("current_date");
+				TodoItem t = new TodoItem(title,memo,category,due_date);
+				t.setId(id);
+				t.setCurrent_date(current_date);
+				list.add(t);
+				
+			}
 			pstmt.close();
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -134,11 +147,25 @@ public class TodoList {
 		Statement stmt;
 		try {
 			stmt= conn.createStatement();
-			String sql = "selec * from list order by"+ orderby;
+			String sql = "select * from list order by "+ orderby;
 			if(ordering==0) {
-				sql+="desc";
+				sql+=" desc";
 			}
 			ResultSet rs= stmt.executeQuery(sql);
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				String category =rs.getString("category");
+				String title =rs.getString("title");
+				String memo =rs.getString("memo");
+				String due_date =rs.getString("due_date");
+				String current_date =rs.getString("current_date");
+				TodoItem t = new TodoItem(title,memo,category,due_date);
+				t.setId(id);
+				t.setCurrent_date(current_date);
+				list.add(t);
+				
+			}
+			stmt.close();
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -266,10 +293,18 @@ public class TodoList {
 	public ArrayList<String> getCategories(){
 		ArrayList<String> list=new ArrayList<String>();
 		Statement stmt;
+		int count=0;
 		try {
 			stmt=conn.createStatement();
 			String sql="SELECT DISTINCT category FROM list";
 			ResultSet rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				String category=rs.getString("category");
+				System.out.print(category+" ");
+				count++;
+				
+			}
+			System.out.printf("\n총 %d개의 카테고리가 등록되어 있습니다.\n",count);
 			stmt.close();
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -285,7 +320,20 @@ public class TodoList {
 			String sql="SELECT * FROM list WHERE category = ?";
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, keyword);
-			ResultSet rs = pstmt.executeQuery(sql);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				String category =rs.getString("category");
+				String title =rs.getString("title");
+				String memo =rs.getString("memo");
+				String due_date =rs.getString("due_date");
+				String current_date =rs.getString("current_date");
+				TodoItem t = new TodoItem(title,memo,category,due_date);
+				t.setId(id);
+				t.setCurrent_date(current_date);
+				list.add(t);
+				
+			}
 			pstmt.close();
 		}catch (SQLException e) {
 			e.printStackTrace();
