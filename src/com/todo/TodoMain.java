@@ -25,7 +25,7 @@ public class TodoMain {
 			case "help":
 				Menu.displaymenu();
 				isList= false;
-
+				break;
 			case "add":
 				TodoUtil.createItem(l);
 				break;
@@ -61,6 +61,17 @@ public class TodoMain {
 				System.out.println("날짜역순으로 정렬하였습니다.");
 				TodoUtil.listAll(l,"due_date",0);
 				break;
+			case "ls_rate":
+				System.out.println("평점 순으로 정렬하였습니다.");
+				TodoUtil.listAll(l,"rate",0);
+				break;
+			case "recom":
+				System.out.println("오늘은 이 영화/드라마 어떠세요?");
+				System.out.println("====================================================================");
+				System.out.println();
+				TodoUtil.recommand(l);
+				break;
+				
 				
 			
 			case "find":
@@ -77,6 +88,15 @@ public class TodoMain {
 				
 			case"ls_cate":
 				TodoUtil.listCateAll(l);
+				break;
+				
+			case"comp":
+				System.out.println("완료된 항목을 입력하세요.");
+				int num=sc.nextInt();
+				TodoUtil.completeitem(num,l);
+				break;
+			case"ls_comp":
+				TodoUtil.listAll(1, l);
 				break;
 				
 			

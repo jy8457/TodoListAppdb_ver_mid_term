@@ -16,7 +16,11 @@ public class Menu {
         System.out.println("9. [키워드 찾기] ( find )");
         System.out.println("10. [카테고리 찾기] ( find_cate )");
         System.out.println("11. [카테고리 정렬] ( ls_cate )");
-        System.out.println("12. [종료] (Or press escape key to exit)");
+        System.out.println("12. [완료 표시] ( comp )");
+        System.out.println("13. [완료된 항목표시] ( ls_comp )");
+        System.out.println("14. [평점별 정렬] ( ls_rate )");
+        System.out.println("15. [볼거리 추천] ( recom )");
+        System.out.println("16. [종료] (Or press escape key to exit)");
         //System.out.println("원하는 메뉴를 선택하세요 >");
     }
     public static void prompt()

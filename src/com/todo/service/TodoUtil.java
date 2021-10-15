@@ -15,9 +15,11 @@ import com.todo.dao.TodoItem;
 import com.todo.dao.TodoList;
 
 public class TodoUtil {
+	//Scanner sc = new Scanner(System.in);
 		public static void createItem(TodoList list) {
 		
-		String title, desc,category,due_date;
+		String title, desc,category,due_date,genre;
+		int rate;
 		
 		Scanner sc = new Scanner(System.in);
 		
@@ -38,10 +40,15 @@ public class TodoUtil {
 		sc.nextLine();
 		System.out.println("설명을 입력하세요.");
 		desc = sc.nextLine().trim();
-		System.out.println("마감일자를 입력해 주세요.");
+		System.out.println("개봉일자를 입력해 주세요.");
 		due_date=sc.nextLine().trim();
-		
-		TodoItem t = new TodoItem(title, desc,category,due_date);
+		System.out.println("장르를 입력해 주세요.");
+		genre=sc.nextLine().trim();
+		System.out.println("개인 평점을 입력해 주세요.");
+		rate=sc.nextInt();
+		System.out.println("영화 시청여부 (1- yes 0-no)");
+		int is_completed=sc.nextInt();
+		TodoItem t = new TodoItem(title,desc,category,due_date,is_completed,rate,genre);
 		if(list.addItem(t)>0)
 		System.out.println("추가 완료");
 	}
@@ -58,7 +65,7 @@ public class TodoUtil {
 				+ "\n");
 		
 		int num=sc.nextInt();
-		if(l.deleteItem(num-1)>0)
+		if(l.deleteItem(num)>0)
 			System.out.println("삭제되었습니다.");
 				
 	
@@ -77,15 +84,15 @@ public class TodoUtil {
 		int num=sc.nextInt();
 		int mark=0;
 		
-		for(TodoItem item:l.getList()) {
-			if(num-1==l.indexOf(item)) {
-				mark=1;
-			}
-		}
-		if(mark==0) {
-			System.out.println("그런 항목은 없습니다!");
-			return;
-		}
+//		for(TodoItem item:l.getList()) {
+//			if(num-1==l.indexOf(item)) {
+//				mark=1;
+//			}
+//		}
+//		if(mark==0) {
+//			System.out.println("그런 항목은 없습니다!");
+//			return;
+//		}
 		System.out.println("새로운 이름을 입력하세요.");
 		String new_title = sc.next().trim();
 		if (l.isDuplicate(new_title)) {
@@ -98,12 +105,17 @@ public class TodoUtil {
 		sc.nextLine();
 		System.out.println("새로운 설명을 입력하세요.");
 		String new_description = sc.nextLine().trim();
-		System.out.println("새로운 마감일자을 입력하세요.");
-		String new_due_date = sc.nextLine().trim();
-		
-		TodoItem t = new TodoItem(new_title, new_description,new_cate,new_due_date);
+		System.out.println("개봉일자를 입력해 주세요.");
+		String due_date=sc.nextLine().trim();
+		System.out.println("장르를 입력해 주세요.");
+		String genre=sc.nextLine().trim();
+		System.out.println("개인 평점을 입력해 주세요.");
+		int rate=sc.nextInt();
+		System.out.println("영화 시청여부 (1- yes 0-no)");
+		int is_completed=sc.nextInt();
+		TodoItem t = new TodoItem(new_title,new_description,new_cate,due_date,is_completed,rate,genre);
 		t.setId(num);
-		if(l.updateItem(t)>0) System.out.println("수정 되었습니다.");
+		if(l.updateItem(t,num)>0) System.out.println("수정 되었습니다.");
 		
 
 	}
@@ -113,7 +125,7 @@ public class TodoUtil {
 		System.out.printf("[전체 목록, 총 %d개]\n",l.getCount());
 		
 		for (TodoItem item : l.getList()) {
-			System.out.println(+item.getId()+"."+ "["+item.getCategory()+"] "+ item.getTitle()+ " - "+ item.getDesc() + " "+ item.getDue_date()+" - " +item.getCurrent_date());
+			System.out.print(item.toString());
 			
 		}
 	}
@@ -121,18 +133,30 @@ public class TodoUtil {
 	public static void listAll(TodoList l,String orderby,int ordering) {
 			
 			System.out.printf("[전체 목록, 총 %d개]\n",l.getCount());
-			
+			int mark=0;
 			for (TodoItem item : l.getOrderedList(orderby, ordering)) {
-				System.out.println(+item.getId()+"."+ "["+item.getCategory()+"] "+ item.getTitle()+ " - "+ item.getDesc() + " "+ item.getDue_date()+" - " +item.getCurrent_date());
-				
+				if(item.getRate()!=mark&&(item.getId()!=1)) {
+					System.out.println("=====================================================================================");
+					System.out.print(item.toString());
+				}
+				else
+				System.out.print(item.toString());
+				mark=item.getRate();
 			}
 		}
+	public static void recommand(TodoList l) {
+		int num=(int)(Math.random()*l.getCount());
+		for(TodoItem item: l.recommand(num)) {
+			System.out.print(item.toString());
+		}
+		System.out.println("위 영화/드라마와 함께 좋은 하루 보내시길 바랍니다!");
+	}
 	
 	public static void find(TodoList l,String keyword) {
 		//TodoUtil.listAll(l);
 		int count=0;
 		for(TodoItem item: l.getList(keyword)) {
-			System.out.println(+item.getId()+1+"."+ "["+item.getCategory()+"] "+ item.getTitle()+ " - "+ item.getDesc() + " "+ item.getDue_date()+" - " +item.getCurrent_date());
+			System.out.print(item.toString());
 			count++;
 		}
 		System.out.printf("총 %d개의 항목을 찾았습니다.\n", count);
@@ -142,13 +166,15 @@ public class TodoUtil {
 		//TodoUtil.listAll(l);
 		int count=0;
 		for(TodoItem item:l.getListCategory(cate)) {
-			System.out.println(+item.getId()+"."+ "["+item.getCategory()+"] "+ item.getTitle()+ " - "+ item.getDesc() + " "+ item.getDue_date()+" - " +item.getCurrent_date());
+			System.out.print(item.toString());
 			count++;
 		}
 		System.out.printf("\n총 %d개의 항목을 찾았습니다.\n", count);
 		
 		
 	}
+	
+	
 	
 	public static void listCateAll(TodoList l) {
 		
@@ -159,6 +185,22 @@ public class TodoUtil {
 		//System.out.printf("\n총 %d개의 카테고리가 등록되어 있습니다,\n", count);
 	}
 	
+	public static void completeitem(int num,TodoList l) {
+		int n=l.completeItem(num);
+		if(n>0) System.out.println("완료 체크하였습니다 !");
+
+	}
+	
+	public static void listAll(int num,TodoList l) {
+		l.getList(num);
+		int count=0;
+		for(TodoItem item:l.getList(num)) {
+			System.out.print(item.toString());
+			count++;
+		}
+		System.out.printf("\n총 %d개의 항목을 찾았습니다.\n", count);
+	}
+	
 	public static void loadlist(TodoList l,String filename) {
 		int count=0;
 		try {
@@ -167,11 +209,16 @@ public class TodoUtil {
 			while((line=br.readLine())!=null) {
 				StringTokenizer st=new StringTokenizer(line,"##");
 				String category=st.nextToken();
+				String genre=st.nextToken();
 				String title=st.nextToken();
-				String desc=st.nextToken();
+				int is_completed=1;
+				String memo=st.nextToken();
+				int rate=1;
 				String due_date=st.nextToken();
 				String current_date=st.nextToken();
-				TodoItem t=new TodoItem(title,desc,category,due_date);
+				
+				
+				TodoItem t=new TodoItem(title,memo,category,due_date,is_completed,rate,genre);
 				t.setCurrent_date(current_date);
 				l.addItem(t);
 				count++;
