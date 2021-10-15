@@ -22,7 +22,6 @@ public class TodoUtil {
 		int rate;
 		
 		Scanner sc = new Scanner(System.in);
-		
 		System.out.println("\n"
 				+ "[항목 추가]\n"
 				+ "추가 하려는 항목의 이름을 입력하세요.\n"
@@ -33,9 +32,7 @@ public class TodoUtil {
 			System.out.printf("이름은 중복 될 수 없습니다.");
 			return;
 		}
-		//sc.nextLine();
 		System.out.println("카테고리를 입력해 주세요");
-		
 		category=sc.next();
 		sc.nextLine();
 		System.out.println("설명을 입력하세요.");

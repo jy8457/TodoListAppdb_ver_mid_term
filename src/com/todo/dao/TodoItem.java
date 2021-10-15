@@ -71,9 +71,9 @@ public class TodoItem {
     @Override
     public String toString() {
     	if (is_completed==1)
-    	return id+ " ["+getCategory()+"]"+" ["+getGenre()+"] "+ getTitle()+ "[V]  - "+ getDesc() + " [" + getRate()+"] " + getDue_date()+" - " +getCurrent_date() +"\n"; 
+    	return id+ " ["+getCategory()+"]"+" ["+getGenre()+"] "+ getTitle()+ "[V]  - "+ getDesc() + " - 평점:[" + getRate()+"] " + getDue_date()+" - " +getCurrent_date() +"\n"; 
     	else
-    	return id+ " ["+getCategory()+"]"+" ["+getGenre()+"] "+ getTitle()+ "  - "+ getDesc() + " [" + getRate()+"] " + getDue_date()+" - " +getCurrent_date() +"\n"; 
+    	return id+ " ["+getCategory()+"]"+" ["+getGenre()+"] "+ getTitle()+ "  - "+ getDesc() + " - 평점:[" + getRate()+"] " + getDue_date()+" - " +getCurrent_date() +"\n"; 
     		
     }
     
